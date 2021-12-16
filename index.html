@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Avatar Generator</title>	
+<link rel="stylesheet" href="css/colorPick.css">
+<link rel="stylesheet" href="css/colorPick1.css">
+<link rel="stylesheet" href="css/colorPick2.css">
+<link rel="stylesheet" href="css/colorPick3.css">
+<link rel="stylesheet" href="css/colorPick4.css">
+<link rel="stylesheet" href="css/colorPick5.css">
+<link rel="stylesheet" href="css/colorPick6.css">
+<script src="js/depend/jquery.js"></script>
+<link rel="stylesheet" href="css/depend/sbundle.css" />
+<script src="js/depend/sbundle.js"></script>
+<style type="text/css">
+*{
+    box-sizing: border-box;
+}
+body{   
+    position: relative;
+    height: 100%;  
+    padding: 20px;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 100%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    align-items: center;
+} 
+.svgWrapper{
+    display: grid;
+    grid-template-columns: 350px;
+    justify-content: center;
+}
+.header-text{
+    text-align: center;
+    color: orange;
+} 
+.buttons{
+    display: grid; 
+    grid-template-columns:1fr 1fr 1fr;
+    justify-content: space-around;
+    grid-gap: 50px;
+}
+.btn{
+    background-color: magenta;  
+    padding: 5px;
+    border-radius: 5px;
+} 
+.btn:hover{
+    background-color: red; 
+    color: white;
+}
+.svgWrapper:focus{
+    outline:none!important;
+}
+.svg-chooser{
+    width: 100%
+}
+.tablink {
+  background-color: #555;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 17px;
+  width: 100%;  
+}
+#defaultOpen{
+    border-top-left-radius: 10px 10px;
+}
+#endtab{
+ border-top-right-radius: 10px 10px;
+}
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+ /*Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  display: none;
+  height: 100%;
+    height: 100%;
+  border-radius: 10px;
+}
+
+/*color picker start*/
+.picker {
+    border-radius: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    -webkit-transition: all linear .2s;
+    -moz-transition: all linear .2s;
+    -ms-transition: all linear .2s;
+    -o-transition: all linear .2s;
+    transition: all linear .2s;
+    border: thin solid #eee;
+}
+.picker:hover {
+    transform: scale(1.1);
+}
+/*color picker end*/
+
+/*selected SVG item and on hover color change star*/
+.chooseclass0,
+.chooseclass1,
+.chooseclass2,
+.chooseclass3,
+.chooseclass4 { 
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+} 
+          #choosed0,#choosed1,#choosed2,#choosed3,#choosed4{
+          background-color: green;
+           cursor: pointer;
+          transition: 0.3s;  
+        }
+.chooseclass0:hover,
+.chooseclass1:hover ,
+.chooseclass2:hover,
+.chooseclass3:hover,
+.chooseclass4:hover{
+    background-color: #777 !important;
+} 
+    
+/*selected SVG item and on hover color change end*/   
+
+</style>
+</head>
+<body>
+
+          <!-- Heading start --> 
+<div class="header">
+    <H2 class="header-text">Random SVG generatore</H2>
+</div>
+            <!-- Heading end --> 
+
+            <!-- SVG display Area start --> 
+<div class="svgWrapper">
+    <svg id="svgOne" class="svgOne" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 3000 3000"  xml:space="preserve">
+    </svg>
+</div>
+            <!-- SVG display Area end -->
+
+        <!-- svg chooser -->
+<div class="svg-chooser">
+
+    <!-- Tab menu Start -->
+          
+<div style="width: 80%;margin: 0 auto;display: grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
+    <button class="tablink" onclick="openPage('Background', this, 'green')" id="defaultOpen">Colors</button>
+    <button class="tablink" onclick="openPage('Body', this, 'green')">Body</button>
+    <button class="tablink" onclick="openPage('Head', this, 'green')">Head</button>
+    <button class="tablink" onclick="openPage('Facail', this, 'green')">Face</button>
+    <button class="tablink" onclick="openPage('Beard', this, 'green')">Beard</button>
+    <button class="tablink" onclick="openPage('Style', this, 'green')" id="endtab">Style</button>
+</div>
+    <!-- tab Menu ends -->
+
+                <!-- color changer start -->
+<div id="Background" class="tabcontent">
+
+    <div style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr  ;">
+    
+    <h3 style="grid-column: 1/8;text-align: center;">Change Colors and also choose color for random creation</h3>
+
+        <label style="color: black;padding: 10px;">Background
+            <div class="picker" id="picker"></div>
+        </label>
+        <label style="color: black;padding: 10px;">Skin
+            <div class="picker" id="picker1"></div>
+        </label>
+        <label style="color: black;padding: 10px;">Cloth
+            <div class="picker" id="picker2"></div>
+        </label>
+        <label style="color: black;padding: 10px;">Hair
+            <div class="picker" id="picker3"></div>
+        </label>
+        <label style="color: black;padding: 10px;">Face
+            <div class="picker" id="picker4"></div>
+        </label>
+        <label style="color: black;padding: 10px;">Facial Hair
+            <div class="picker" id="picker5"></div>
+        </label>
+        <label style="color: black;padding: 10px;">Accesseries
+            <div class="picker" id="picker6"></div>
+        </label>                        
+    </div>
+</div>
+                <!-- color changer end -->
+
+                <!-- body category chooser start -->
+<div id="Body" class="tabcontent">
+    <div #swiperRef="" class="swiper-container mySwiper">
+        <div class="swiper-wrapper" id="additem"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+                <!-- body category chooser end -->
+
+                <!-- head category chooser start -->
+<div id="Head" class="tabcontent">
+    <div #swiperRef="" class="swiper-container mySwiper">
+        <div class="swiper-wrapper" id="additem1"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+                <!-- head category chooser end -->
+
+                <!-- Face category chooser start -->
+<div id="Facail" class="tabcontent">
+    <div #swiperRef="" class="swiper-container mySwiper">
+    <div class="swiper-wrapper" id="additem2"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+    </div>
+</div>
+                  <!-- Face category chooser end -->
+
+                  <!-- Facail hair category chooser end -->
+<div id="Beard" class="tabcontent">
+    <div #swiperRef="" class="swiper-container mySwiper">
+        <div class="swiper-wrapper" id="additem3"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+                    <!-- Facail hair category chooser end -->
+
+                   <!-- Style category chooser end --> 
+<div id="Style" class="tabcontent">
+    <div #swiperRef="" class="swiper-container mySwiper">
+        <div class="swiper-wrapper" id="additem4"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>    
+            
+</div>
+            <!-- svg chooser end-->
+
+            <!-- Download buttons start -->
+
+<div class="buttons">
+    <button class="btn Shuffle" onclick="shuffle()" id="shuff">Shuffle</button>
+    <button class="btn svg" onclick="svgDataURL()">Save SVG</button>
+    <button class="btn png" onclick="svgDatapng()">svg to png</button>
+<div style="grid-column: 1/4">
+    <h3 style="text-align: center;">you see this</h3>
+</div>
+<div>
+    <label>Required Avatars: <input type="number" id="repeatitions"></label>
+</div>
+<div>
+    <label>Save As SVG:<input type="radio" name="downloadoption" id="svgdwnld" value="SVG"></label>
+    <label>Save As SVG:<input type="radio" name="downloadoption" id="pngdwnld" value="PNG"></label>
+</div>
+    <button class="btn gns" onclick="shuffleanddownload()">Generate and save</button>
+</div>
+
+                <!-- Download buttons end -->
+<!-- fordownload purpose start -->
+<input type="hidden" id="c1" value=""/>
+<input type="hidden" id="c2" value=""/>
+<input type="hidden" id="c3" value=""/>
+<input type="hidden" id="c4" value=""/>
+<input type="hidden" id="c5" value=""/>
+<canvas id="canvas" style="display: none;"></canvas>
+<!-- for download purpose end -->
+
+<!-- categories files start -->
+<script type="text/javascript" src="js/cat/facialhair.js"></script>
+<script type="text/javascript" src="js/cat/head.js"></script>
+<script type="text/javascript" src="js/cat/face.js"></script>
+<script type="text/javascript" src="js/cat/body.js"></script>
+<script type="text/javascript" src="js/cat/accessories.js"></script>
+<!-- categories files end -->
+
+<script type="text/javascript">
+    var Draw = [B, H, F, M, A];
+    var svgns = "http://www.w3.org/2000/svg";
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, "id", "recbackgrond");
+    rect.setAttributeNS(null, 'x', 0);
+    rect.setAttributeNS(null, 'y', 0);
+    rect.setAttributeNS(null, 'height', "100%");
+    rect.setAttributeNS(null, 'width', "100%");
+    rect.setAttributeNS(null, 'fill', '#FFD55A'); 
+      
+    var target = document.getElementById('svgOne');
+    target.appendChild(rect);
+ 
+    var v =  Draw.length; 
+    for (var i=0;i<v;i++){
+          var j = 1+i;
+        const parser = new DOMParser();
+        var svgString = Draw[i][0].g;
+        var st = Draw[i][0].st;
+        var id = Draw[i][0].id;
+        cls = 'c'+j;
+        const doc = parser.parseFromString(svgString, "image/svg+xml");
+        const st1 = parser.parseFromString(st, "text/xml");
+        var doc1 = doc.documentElement;
+        var st2 = st1.documentElement;
+        
+        document.getElementById(cls).value=id;
+        doc1.insertAdjacentElement("afterbegin",st2);
+        target.insertAdjacentElement("beforeend",doc1);
+  }
+</script>
+<script type="text/javascript" src="js/load.js"></script>
+<script type="text/javascript">
+ document.getElementById("defaultOpen").click();
+
+Loadbody();
+Loadhead();
+Loadface();
+LoadFh();
+Loadacc();
+
+      var swiper = new Swiper(".mySwiper", {
+                    observer: true,
+            observeParents: true,
+        slidesPerView: 5,
+        centeredSlides: false,
+        spaceBetween: 30,
+        update: true,
+        pagination: {
+          el: ".swiper-pagination",
+          type: "fraction",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+
+
+
+// Download As PNG Start
+var svg = document.getElementById('svgOne');
+var canvas = document.getElementById('canvas');
+function triggerDownload (imgURI) {
+
+
+  var evt = new MouseEvent('click', {
+    view: window,
+    bubbles: false,
+    cancelable: true
+  });
+
+    var c1=document.getElementById('c1').value;
+    var c2=document.getElementById('c2').value;
+    var c3=document.getElementById('c3').value;
+    var c4=document.getElementById('c4').value;
+    var c5=document.getElementById('c5').value;
+  var a = document.createElement('a');
+  a.setAttribute('download', `${c1}-${c2}-${c3}-${c4}-${c5}.png`);
+  a.setAttribute('href', imgURI);
+  a.setAttribute('target', '_blank');
+
+  a.dispatchEvent(evt);
+}
+
+function svgDatapng() {
+  var canvas = document.getElementById('canvas');
+        canvas.width=2000;
+        canvas.height=2000;
+  var ctx = canvas.getContext('2d');
+  var data = (new XMLSerializer()).serializeToString(svg);
+  var DOMURL = window.URL || window.webkitURL || window;
+
+  var img = new Image();
+  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+  var url = DOMURL.createObjectURL(svgBlob);
+
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0);
+    DOMURL.revokeObjectURL(url);
+
+    var imgURI = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+
+    triggerDownload(imgURI);
+  };
+
+  img.src = url;
+}
+// Download AS SVG end
+
+// Download AS SVG start
+function svgDataURL() {
+        var svg = document.getElementById('svgOne');
+        var svgAsXML = (new XMLSerializer).serializeToString(svg);
+        var url = "data:image/svg+xml," + encodeURIComponent(svgAsXML);
+       
+        var evt = new MouseEvent('click', {
+            view: window,
+            bubbles: false,
+            cancelable: false
+        });
+
+        var c1=document.getElementById('c1').value;
+        var c2=document.getElementById('c2').value;
+        var c3=document.getElementById('c3').value;
+        var c4=document.getElementById('c4').value;
+        var c5=document.getElementById('c5').value;
+        var a = document.createElement('a');
+        a.setAttribute('download', `${c1}-${c2}-${c3}-${c4}-${c5}.svg`);
+        a.setAttribute('href', url);
+        a.setAttribute('target', '_blank');
+        a.dispatchEvent(evt);
+      }
+ // Download AS SVG end
+
+ // category change tab start
+                        function openPage(pageName,elmnt,color) {
+                        var i, tabcontent, tablinks;
+                        tabcontent = document.getElementsByClassName("tabcontent");
+                        tablinks = document.getElementsByClassName("tablink");
+                            for (i = 0; i < tabcontent.length; i++) {
+                                tabcontent[i].style.display = "none";
+                            }
+  
+                            for (i = 0; i < tablinks.length; i++) {
+                                tablinks[i].style.backgroundColor = "";
+                            }
+
+                        document.getElementById(pageName).style.display = "block";
+                        elmnt.style.backgroundColor = color;
+                    }
+
+                
+ // category change tab end
+
+
+
+
+
+
+
+// function triggerDownload (imgURI) {
+
+
+//   var evt = new MouseEvent('click', {
+//     view: window,
+//     bubbles: false,
+//     cancelable: true
+//   });
+
+//     var c1=document.getElementById('c1').value;
+//     var c2=document.getElementById('c2').value;
+//     var c3=document.getElementById('c3').value;
+//     var c4=document.getElementById('c4').value;
+//     var c5=document.getElementById('c5').value;
+//   var a = document.createElement('a');
+//   a.setAttribute('download', `${c1}-${c2}-${c3}-${c4}-${c5}.png`);
+//   a.setAttribute('href', imgURI);
+//   a.setAttribute('target', '_blank');
+
+//   a.dispatchEvent(evt);
+// }
+
+function svgDatapng() {
+    var c1=document.getElementById('c1').value;
+    var c2=document.getElementById('c2').value;
+    var c3=document.getElementById('c3').value;
+    var c4=document.getElementById('c4').value;
+    var c5=document.getElementById('c5').value;
+    var svg = document.getElementById('svgOne');
+
+    var canvas = document.getElementById('canvas');
+        canvas.width=2000;
+        canvas.height=2000;
+  var ctx = canvas.getContext('2d');
+  var data = (new XMLSerializer()).serializeToString(svg);
+  var DOMURL = window.URL || window.webkitURL || window;
+
+  var img = new Image();
+  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+  var url = DOMURL.createObjectURL(svgBlob);
+
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0);
+    DOMURL.revokeObjectURL(url);
+
+    var imgURI = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+
+      var evt = new MouseEvent('click', {
+    view: window,
+    bubbles: false,
+    cancelable: true
+  });
+
+
+  var a = document.createElement('a');
+  a.setAttribute('download', `${c1}-${c2}-${c3}-${c4}-${c5}.png`);
+  a.setAttribute('href', imgURI);
+  a.setAttribute('target', '_blank');
+
+  a.dispatchEvent(evt);
+  };
+
+  img.src = url;
+}
+
+
+</script>
+<script src="js/col/colorPick.js"></script>
+<script src="js/col/colorPick1.js"></script>
+<script src="js/col/colorPick2.js"></script>
+<script src="js/col/colorPick3.js"></script>
+<script src="js/col/colorPick4.js"></script>
+<script src="js/col/colorPick5.js"></script>
+<script src="js/col/colorPick6.js"></script>
+<script type="text/javascript" src="js/col/script.js"></script>
+
+    </body>
+</html>
